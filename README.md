@@ -12,7 +12,7 @@ cd LM
 CUDA_VISIBLE_DEVICES=3 python main.py --cuda --emsize 1500 --nhid 1500  --epochs 40 --sememe_dim 1500 --model_type LSTM_cell --dropout 0.65
 ```
 
-## Sentence encoders
+## SNLI pretraining
 
 First download the pretrained glove embeddings, which can be downloaded through: https://nlp.stanford.edu/projects/glove/ ,and SNLI dataset through:
 ```
@@ -24,6 +24,10 @@ Then train on SNLI Dataset by:
 ```
 python3 train_nli.py --word_emb_path ../glove/glove.840B.300d.txt --encoder_type LSTM_cell --gpu_id 2
 ```
+
+## downstream sentence encoder probing
+
+Save the encoder trained on SNLI, and test the downstream sentence enoding task using SentEval/encoders/infersent.py (may need to modify the corresponding paths)
 
 ## Adversarial attack
 
