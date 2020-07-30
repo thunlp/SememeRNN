@@ -22,14 +22,14 @@ parser = argparse.ArgumentParser(description='NLI training')
 parser.add_argument("--model", type=str, default='BILSTM_baseline', help="NLI data path (SNLI or MultiNLI)")
 params, _ = parser.parse_known_args()
 MODEL_PATH = []
-for dir in os.listdir('/data1/private/qinyujia/Sememe-enhanced-RNN-qin/savedir'):
+for dir in os.listdir('../../savedir'):
     if params.model in dir and 'encoder' in dir:
         if 'BI' not in params.model:
             if 'BI' not in dir:
-                MODEL_PATH.append('/data1/private/qinyujia/Sememe-enhanced-RNN-qin/savedir/' + dir)
+                MODEL_PATH.append('../../savedir/' + dir)
         else:
             if 'BI' in dir:
-                MODEL_PATH.append('/data1/private/qinyujia/Sememe-enhanced-RNN-qin/savedir/' + dir)
+                MODEL_PATH.append('../../savedir/' + dir)
 #MODEL_PATH = '/data1/private/qinyujia/Sememe-enhanced-RNN-qin/savedir/' + 'model.pickle_BIGRU_baseline_9791.encoder.pkl'
 
 # get models.py from InferSent repo
@@ -39,7 +39,7 @@ from models_s import *
 # Set PATHs
 PATH_SENTEVAL = '../'
 PATH_TO_DATA = '../data'
-PATH_TO_W2V = '../../glove/glove.840B.300d.txt'  # or crawl-300d-2M.vec for V2
+PATH_TO_W2V = '../../../glove/glove.840B.300d.txt'  # or crawl-300d-2M.vec for V2
 #MODEL_PATH = 'encoder/infersent1.pkl'
 #MODEL_PATH = '/data1/private/qinyujia/Sememe-enhanced-RNN-qin/savedir/model.pickle_BILSTM_baseline_2465.encoder.pkl'
 V = 1 # version of InferSent
@@ -50,12 +50,9 @@ V = 1 # version of InferSent
 sys.path.insert(0, PATH_SENTEVAL)
 import senteval
 
-#sememe.txt是共有哪些英文sememe
-sememe_dir = '/data1/private/qinyujia/Sememe-enhanced-RNN-qin/dataset/sememe.txt'
-#hownet_en.txt是每个英文词有哪些英文sememe
-hownet_dir = '/data1/private/qinyujia/Sememe-enhanced-RNN-qin/dataset/hownet_en.txt'
-#用来将每个词还原到原型
-lemma_dir =  '/data1/private/qinyujia/Sememe-enhanced-RNN-qin/dataset/lemmatization.txt'
+sememe_dir = '../../dataset/sememe.txt'
+hownet_dir = '../../dataset/hownet_en.txt'
+lemma_dir =  '../../dataset/lemmatization.txt'
 sememe = Sememe(hownet_dir = hownet_dir, sememe_dir = sememe_dir, lemma_dir = lemma_dir, filename = hownet_dir, lower = True, meaningless= False, wordnet = False)
 
 def prepare(params, samples):
@@ -96,16 +93,15 @@ if __name__ == "__main__":
         model.load_state_dict(torch.load(model_path))
         model.set_w2v_path(PATH_TO_W2V)
 
-        
+
 
         params_senteval['infersent'] = model.cuda()
         se = senteval.engine.SE(params_senteval, batcher, prepare)
-        transfer_tasks = ['MRPC', 'CR']
-        #transfer_tasks = ['STS12', 'STS13', 'STS14', 'STS15', 'STS16',
-                        #'MR', 'CR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC',
-                        #'SICKEntailment', 'SICKRelatedness', 'STSBenchmark',
-                        #'Length', 'WordContent', 'Depth', 'TopConstituents',
-                        #'BigramShift', 'Tense', 'SubjNumber', 'ObjNumber',
-                        #'OddManOut', 'CoordinationInversion']
+        transfer_tasks = ['STS12', 'STS13', 'STS14', 'STS15', 'STS16',
+                        'MR', 'CR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC',
+                        'SICKEntailment', 'SICKRelatedness', 'STSBenchmark',
+                        'Length', 'WordContent', 'Depth', 'TopConstituents',
+                        'BigramShift', 'Tense', 'SubjNumber', 'ObjNumber',
+                        'OddManOut', 'CoordinationInversion']
         results = se.eval(transfer_tasks)
         print(results)
