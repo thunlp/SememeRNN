@@ -33,9 +33,9 @@ Save the encoder trained on SNLI at ./savedir, and test the downstream sentence 
 
 ## Adversarial attack
 
-For adversarial attack, you could generate adversarial examples after you have trainning an NLI model.
+For adversarial attack, you could generate adversarial examples after you have trainning an NLI model. Please change your trained .pkl file path and corresponding encoder type.
 
 ```
 python3 adv_attack.py
 ```
-Then you should add these new example to the original NLI dataset and keep trainning the NLI model for more epochs. Please keep encoder type all the same.
+Then you should add these new example to the original NLI dataset and keep trainning the NLI model for more epochs.
