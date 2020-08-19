@@ -6,7 +6,7 @@ If you have any question about the code, feel free to contact: yujiaqin16@gmail.
 ## Sememe Dataset
 `sememe.txt` comprises all 2186 sememes. `hownet_en.txt` is an English version of HowNet sememe knowledge dictionary, where each line of word is followed by a line of all its sememes. More details about HowNet and sememes can be found in paper.
 
-## Language modeling
+## Language Modeling
 First download PTB dataset and put it at `data/ptb`, then run:
 
 ```
@@ -34,7 +34,7 @@ python3 train_nli.py --word_emb_path ../glove/glove.840B.300d.txt --encoder_type
 
 Save the encoder trained on SNLI at `./savedir`, and test the downstream sentence enoding task using `SentEval/encoders/infersent.py` (you may need to modify the corresponding paths)
 
-## Adversarial attack
+## Adversarial Attack
 
 For adversarial attack, you could generate adversarial examples after you have trainning an NLI model. Please change your trained `.pkl` file path and corresponding encoder type.
 
