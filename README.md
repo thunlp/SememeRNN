@@ -49,12 +49,12 @@ Please cite the following paper if the code or data help you:
 
 ```
 @article{qin2020improving,
+  title={Improving Sequence Modeling Ability of Recurrent Neural Networks via Sememes},
   author={Qin, Yujia and Qi, Fanchao and Ouyang, Sicong and Liu, Zhiyuan and Yang, Cheng and Wang, Yasheng and Liu, Qun and Sun, Maosong},
-  journal={IEEE/ACM Transactions on Audio, Speech, and Language Processing}, 
-  title={Improving Sequence Modeling Ability of Recurrent Neural Networks via Sememes}, 
-  year={2020},
+  journal={IEEE/ACM Transactions on Audio, Speech, and Language Processing},
   volume={28},
-  number={},
-  pages={2364-2373},
- }
+  pages={2364--2373},
+  year={2020},
+  publisher={IEEE}
+}
 ```
